@@ -22,6 +22,14 @@ body {
   background: rgb(83, 83, 85);
   font-family: "Builder Sans", Arial, sans-serif;
   font-weight: 700;
+  color: #fff;
+}
+
+/* LOADING SCREEN */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: rgb(83, 83, 85);
 }
 
 .logo {
@@ -34,43 +42,126 @@ body {
   object-fit: contain;
 }
 
-.loading {
+.loading-text {
   position: absolute;
-  bottom: 24px;
+  bottom: 8px;
   left: 0;
   width: 100%;
   text-align: center;
-  font-size: 13px;
-  color: #fff;
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 400;
 }
 
 #dots {
   display: inline-block;
-  width: 18px;
+  width: 16px;
   text-align: left;
+}
+
+/* ERROR SCREEN */
+#error-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgb(83, 83, 85);
+  text-align: center;
+}
+
+.error-content {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  width: calc(100% - 40px);
+  max-width: 520px;
+  transform: translate(-50%, -50%);
+}
+
+.error-title {
+  font-family: "Builder Sans", Arial, sans-serif;
+  font-size: clamp(25px, 6vw, 34px);
+  font-weight: 700;
+  margin: 0 0 26px;
+}
+
+.error-message {
+  font-family: "Builder Sans", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.discord-message {
+  font-family: "Builder Sans", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #d0d0d0;
+  margin: 0;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  color: #aaa;
 }
 </style>
 </head>
 
 <body>
+
+<div id="loading-screen">
   <img
     class="logo"
     src="BloXera-18-10-2026.png"
     alt="BLOXERA"
   >
 
-  <div class="loading">
+  <div class="loading-text">
     Loading<span id="dots">.</span>
   </div>
+</div>
+
+<div id="error-screen">
+  <div class="error-content">
+    <h1 class="error-title">WE'RE SORRY!</h1>
+
+    <p class="error-message">
+      Our servers are down, come back later
+      when this issue gets resolved.
+    </p>
+
+    <p class="discord-message">
+      See our status in our discord.
+    </p>
+  </div>
+
+  <div class="copyright">
+    © Bloxera 2026-2026
+  </div>
+</div>
 
 <script>
 const dots = document.getElementById("dots");
 let count = 1;
 
-setInterval(() => {
+const dotAnimation = setInterval(() => {
   count = count >= 3 ? 1 : count + 1;
   dots.textContent = ".".repeat(count);
-}, 350);
+}, 2000);
+
+setTimeout(() => {
+  clearInterval(dotAnimation);
+
+  document.getElementById("loading-screen").style.display = "none";
+  document.getElementById("error-screen").style.display = "block";
+}, 4500);
 </script>
+
 </body>
 </html>
