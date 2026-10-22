@@ -1,181 +1,60 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BLOXERA</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-html, body {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOXERA</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }body {
   margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #f2f4f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-body {
-  background: rgb(83, 83, 85);
-  font-family: "Builder Sans", Arial, sans-serif;
-  font-weight: 700;
-  color: #fff;
+.account-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(320px, calc(100% - 40px));
 }
 
-#loading-screen {
-  position: fixed;
-  inset: 0;
-  background: rgb(83, 83, 85);
-}
-
-.logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(65vw, 360px);
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: contain;
-}
-
-.loading-text {
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  width: 100%;
+a {
+  display: block;
+  padding: 14px 20px;
+  border-radius: 5px;
   text-align: center;
-  color: #aaa;
-  font-size: 10px;
-  font-weight: 400;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
 }
 
-#dots {
-  display: inline-block;
-  width: 16px;
-  text-align: left;
+.login {
+  background: #0876d9;
+  color: white;
 }
 
-#error-screen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgb(83, 83, 85);
-  text-align: center;
+.signup {
+  background: white;
+  color: #0876d9;
+  border: 1px solid #0876d9;
 }
 
-.error-content {
-  position: absolute;
-  top: 44%;
-  left: 50%;
-  width: calc(100% - 40px);
-  max-width: 520px;
-  transform: translate(-50%, -50%);
+a:focus-visible {
+  outline: 3px solid #222;
+  outline-offset: 3px;
 }
 
-.error-title {
-  font-family: "Builder Sans", Arial, sans-serif;
-  font-size: clamp(25px, 6vw, 34px);
-  font-weight: 700;
-  margin: 0 0 26px;
-}
-
-.error-message {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  margin: 0 0 16px;
-}
-
-.discord-message {
-  font-size: 13px;
-  font-weight: 400;
-  margin: 0;
-}
-
-.discord-message a {
-  color: #00a2ff;
-  text-decoration: underline;
-  text-decoration-color: #00a2ff;
-}
-
-.discord-message a:visited {
-  color: #00a2ff;
-}
-
-.copyright {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 400;
-  color: #aaa;
-}
-</style>
+  </style>
 </head>
-
 <body>
-
-<div id="loading-screen">
-  <img
-    class="logo"
-    src="BloXera-18-10-2026.png"
-    alt="BLOXERA"
-  >
-
-  <div class="loading-text">
-    Loading<span id="dots">.</span>
-  </div>
-</div>
-
-<div id="error-screen">
-  <div class="error-content">
-    <h1 class="error-title">WE'RE SORRY!</h1>
-
-    <p class="error-message">
-      Our servers are down, come back later
-      when this issue gets resolved.
-    </p>
-
-    <p class="discord-message">
-      See our status in our
-      <a
-        href="https://discord.gg/NyVYZm65T"
-        target="_blank"
-        rel="noopener noreferrer"
-      >discord.</a>
-    </p>
-  </div>
-
-  <div class="copyright">
-    © Bloxera 2026-2026
-  </div>
-</div>
-
-<script>
-const dots = document.getElementById("dots");
-let count = 1;
-
-const dotAnimation = setInterval(() => {
-  count = count >= 3 ? 1 : count + 1;
-  dots.textContent = ".".repeat(count);
-}, 2000);
-
-setTimeout(() => {
-  clearInterval(dotAnimation);
-
-  document.getElementById("loading-screen").style.display = "none";
-  document.getElementById("error-screen").style.display = "block";
-
-  if (location.pathname !== "/index.html") {
-    history.replaceState(null, "", "/index.html");
-  }
-}, 4500);
-</script>
-
+  <main class="account-options">
+    <a class="login" href="login.html">Login</a>
+    <a class="signup" href="signup.html">Sign Up</a>
+  </main>
 </body>
 </html>
