@@ -1,60 +1,68 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLOXERA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 | Not Found</title>
   <style>
     * {
       box-sizing: border-box;
-    }body {
+    }html, body {
+  width: 100%;
+  min-height: 100%;
   margin: 0;
+}
+
+body {
   min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background: #f2f4f7;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.account-options {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: min(320px, calc(100% - 40px));
+h1 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 600;
 }
 
-a {
+h2 {
+  margin: 0 0 22px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #555;
+}
+
+img {
   display: block;
-  padding: 14px 20px;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 17px;
-  font-weight: bold;
-}
-
-.login {
-  background: #0876d9;
-  color: white;
-}
-
-.signup {
-  background: white;
-  color: #0876d9;
-  border: 1px solid #0876d9;
-}
-
-a:focus-visible {
-  outline: 3px solid #222;
-  outline-offset: 3px;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
 }
 
   </style>
 </head>
 <body>
-  <main class="account-options">
-    <a class="login" href="login.html">Login</a>
-    <a class="signup" href="signup.html">Sign Up</a>
+  <main>
+    <h1>Content Not Found</h1>
+    <h2>404 | Not Found</h2>
+    <img
+      src="Screenshot_20261021_233715_Chrome.jpg"
+      alt="Not Found"
+    >
   </main>
 </body>
 </html>
