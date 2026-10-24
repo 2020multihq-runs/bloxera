@@ -1,184 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLOXERA — Account</title>
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      background: #101114;
-      color: #f5f5f5;
-      font-family: Arial, sans-serif;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 390px;
-      padding: 30px;
-      background: #191a1f;
-      border: 1px solid #303139;
-      border-radius: 16px;
-    }
-
-    .logo {
-      text-align: center;
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: 3px;
-      color: #f59e0b;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #a5a5ad;
-      margin: 10px 0 25px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    button, input { font: inherit; }
-
-    .tab {
-      flex: 1;
-      padding: 12px;
-      border: 0;
-      border-radius: 8px;
-      background: #292a31;
-      color: #ddd;
-      cursor: pointer;
-    }
-
-    .tab.active, .primary {
-      background: #f59e0b;
-      color: #171717;
-      font-weight: bold;
-    }
-
-    label {
-      display: block;
-      margin: 16px 0 7px;
-      font-size: 14px;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      color: white;
-      background: #111216;
-      border: 1px solid #393a43;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    input:focus { border-color: #f59e0b; }
-
-    .primary, .discord {
-      width: 100%;
-      padding: 13px;
-      margin-top: 18px;
-      border: 0;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .discord {
-      background: #5865f2;
-      color: white;
-      font-weight: bold;
-    }
-
-    .note {
-      margin-top: 18px;
-      color: #999aa4;
-      text-align: center;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    [hidden] { display: none !important; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLOXERA - Account Recovery</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:#f2f2f2;
+  color:#393b3d;
+  font-family:Arial,Helvetica,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+.panel{
+  width:100%;
+  max-width:390px;
+  background:#fff;
+  border:1px solid #c8c8c8;
+  padding:24px;
+}
+h2{font-size:23px;font-weight:500;margin:0 0 8px}
+p{font-size:14px;line-height:1.45;color:#666}
+.tabs{display:flex;border-bottom:1px solid #ccc;margin:20px 0}
+.tabs button{
+  flex:1;padding:12px 5px;border:0;background:#eee;
+  color:#444;font-size:14px;cursor:pointer
+}
+.tabs button.active{background:#f59e0b;color:#fff}
+label{display:block;font-size:13px;margin:14px 0 6px}
+input,select{
+  width:100%;height:40px;padding:9px;
+  border:1px solid #aaa;border-radius:2px;
+  background:#fff;font-size:14px
+}
+button.action{
+  width:100%;height:40px;margin-top:16px;
+  border:1px solid #b97700;background:#f59e0b;
+  color:#fff;font-size:14px;cursor:pointer
+}
+button.discord{
+  background:#5865f2;border-color:#4752c4
+}
+button:disabled{opacity:.55;cursor:not-allowed}
+.note{font-size:12px;color:#777;margin-top:14px}
+a{color:#a96800;font-size:13px}
+.status{font-size:13px;margin-top:12px;overflow-wrap:anywhere}
+.hidden{display:none}
+</style>
 </head>
 <body>
-  <main class="card">
-    <div class="logo">BLOXERA</div>
-    <p class="subtitle">Your account. Your adventure.</p>
+<main class="panel">
+  <h2>Account Recovery</h2>
+  <p>Recover access to your BLOXERA account.</p>
 
-    <div class="tabs">
-      <button class="tab active" id="loginTab"
-        type="button" onclick="showForm('login')">Log In</button>
-      <button class="tab" id="signupTab"
-        type="button" onclick="showForm('signup')">Sign Up</button>
+  <div class="tabs">
+    <button id="usernameTab" class="active" type="button">Forgot Username</button>
+    <button id="passwordTab" type="button">Forgot Password</button>
+  </div>
+
+  <button id="discordButton" class="action discord" type="button">
+    Link Discord
+  </button>
+
+  <p id="discordStatus">Link the Discord account associated with your BLOXERA account to verify your identity.</p>
+
+  <form id="recoveryForm">
+    <label for="username" id="usernameLabel">BLOXERA username (if known)</label>
+    <input id="username" name="username" autocomplete="username"
+      placeholder="Enter your username">
+
+    <div id="passwordFields" class="hidden">
+      <label for="newPassword">New password</label>
+      <input id="newPassword" name="newPassword" type="password"
+        autocomplete="new-password" minlength="8"
+        placeholder="At least 8 characters">
+      <label for="confirmPassword">Confirm new password</label>
+      <input id="confirmPassword" name="confirmPassword" type="password"
+        autocomplete="new-password" minlength="8"
+        placeholder="Enter it again">
     </div>
 
-    <form id="loginForm">
-      <label for="loginUser">Username</label>
-      <input id="loginUser" name="username"
-        autocomplete="username" required>
+    <button class="action" type="submit" id="submitButton">
+      Recover Username
+    </button>
+  </form>
 
-      <label for="loginPass">Password</label>
-      <input id="loginPass" name="password"
-        type="password" autocomplete="current-password" required>
+  <div id="status" class="status" role="status"></div>
+  <p class="note">For account security, recovery requires verification through the Discord account linked to BLOXERA.</p>
+  <a href="/">Back to Login</a>
+</main>
 
-      <button class="primary" type="submit">Log In</button>
-    </form>
+<script>
+const API_BASE = "https://bloxera.2020multihq.workers.dev";
 
-    <form id="signupForm" hidden>
-      <button class="discord" type="button"
-        onclick="alert('Discord authorization will be connected next.')">
-        Link Discord
-      </button>
+let recoveryType = "username";
+let discordVerified = false;
 
-      <label for="signupUser">Choose a username</label>
-      <input id="signupUser" name="username"
-        autocomplete="username" required>
+const usernameTab = document.getElementById("usernameTab");
+const passwordTab = document.getElementById("passwordTab");
+const usernameLabel = document.getElementById("usernameLabel");
+const usernameInput = document.getElementById("username");
+const passwordFields = document.getElementById("passwordFields");
+const submitButton = document.getElementById("submitButton");
+const statusBox = document.getElementById("status");
+const discordButton = document.getElementById("discordButton");
+const discordStatus = document.getElementById("discordStatus");
 
-      <label for="signupPass">Create a password</label>
-      <input id="signupPass" name="password"
-        type="password" autocomplete="new-password"
-        minlength="8" required>
+function setMode(mode) {
+  recoveryType = mode;
+  usernameTab.classList.toggle("active", mode === "username");
+  passwordTab.classList.toggle("active", mode === "password");
+  passwordFields.classList.toggle("hidden", mode !== "password");
+  usernameLabel.textContent = mode === "username"
+    ? "BLOXERA username (if known)"
+    : "BLOXERA username";
+  usernameInput.required = mode === "password";
+  submitButton.textContent = mode === "username"
+    ? "Recover Username"
+    : "Reset Password";
+  statusBox.textContent = "";
+}
 
-      <button class="primary" type="submit">
-        Create Account
-      </button>
+usernameTab.addEventListener("click", () => setMode("username"));
+passwordTab.addEventListener("click", () => setMode("password"));
 
-      <p class="note">
-        You must link Discord before creating an account.
-        Account creation will be enabled after secure
-        backend integration.
-      </p>
-    </form>
-  </main>
+/*
+  IMPORTANT:
+  This button must be connected to a real server-created Discord OAuth URL.
+  Never collect a Discord password on this page.
+*/
+discordButton.addEventListener("click", async () => {
+  statusBox.textContent =
+    "Discord OAuth is not connected yet. The backend must provide the official authorization URL.";
+});
 
-  <script>
-    function showForm(mode) {
-      const login = mode === 'login';
+/*
+  Do not send passwords or recovery requests to an unimplemented endpoint.
+  Connect this form only after the Worker has verified Discord OAuth and
+  implemented secure recovery endpoints.
+*/
+document.getElementById("recoveryForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-      document.getElementById('loginForm').hidden = !login;
-      document.getElementById('signupForm').hidden = login;
-      document.getElementById('loginTab').classList.toggle('active', login);
-      document.getElementById('signupTab').classList.toggle('active', !login);
-    }
+  if (!discordVerified) {
+    statusBox.textContent =
+      "Please link and verify your Discord account first. Discord authorization is not connected yet.";
+    return;
+  }
 
-    document.getElementById('loginForm').addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Login will be connected to the BLOXERA backend next.');
-    });
-
-    document.getElementById('signupForm').addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Real registration requires Discord authorization and backend integration.');
-    });
-  </script>
+  statusBox.textContent =
+    "Recovery service is not connected yet. No account details have been changed.";
+});
+</script>
 </body>
 </html>
