@@ -1,68 +1,184 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>404 | Not Found</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOXERA — Account</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }html, body {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-}
+    * { box-sizing: border-box; }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: #101114;
+      color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
 
-main {
-  width: 100%;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+    .card {
+      width: 100%;
+      max-width: 390px;
+      padding: 30px;
+      background: #191a1f;
+      border: 1px solid #303139;
+      border-radius: 16px;
+    }
 
-h1 {
-  margin: 0 0 10px;
-  font-size: 28px;
-  font-weight: 600;
-}
+    .logo {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #f59e0b;
+    }
 
-h2 {
-  margin: 0 0 22px;
-  font-size: 20px;
-  font-weight: 400;
-  color: #808080;
-}
+    .subtitle {
+      text-align: center;
+      color: #a5a5ad;
+      margin: 10px 0 25px;
+    }
 
-img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 60vh;
-  object-fit: contain;
-}
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
 
+    button, input { font: inherit; }
+
+    .tab {
+      flex: 1;
+      padding: 12px;
+      border: 0;
+      border-radius: 8px;
+      background: #292a31;
+      color: #ddd;
+      cursor: pointer;
+    }
+
+    .tab.active, .primary {
+      background: #f59e0b;
+      color: #171717;
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 7px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      color: white;
+      background: #111216;
+      border: 1px solid #393a43;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input:focus { border-color: #f59e0b; }
+
+    .primary, .discord {
+      width: 100%;
+      padding: 13px;
+      margin-top: 18px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .discord {
+      background: #5865f2;
+      color: white;
+      font-weight: bold;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: #999aa4;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    [hidden] { display: none !important; }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Content Not Found</h1>
-    <h2>404 | Not Found</h2>
-    <img
-      src="Screenshot_20261021_233715_Chrome.jpg"
-      alt="Not Found"
-    >
+  <main class="card">
+    <div class="logo">BLOXERA</div>
+    <p class="subtitle">Your account. Your adventure.</p>
+
+    <div class="tabs">
+      <button class="tab active" id="loginTab"
+        type="button" onclick="showForm('login')">Log In</button>
+      <button class="tab" id="signupTab"
+        type="button" onclick="showForm('signup')">Sign Up</button>
+    </div>
+
+    <form id="loginForm">
+      <label for="loginUser">Username</label>
+      <input id="loginUser" name="username"
+        autocomplete="username" required>
+
+      <label for="loginPass">Password</label>
+      <input id="loginPass" name="password"
+        type="password" autocomplete="current-password" required>
+
+      <button class="primary" type="submit">Log In</button>
+    </form>
+
+    <form id="signupForm" hidden>
+      <button class="discord" type="button"
+        onclick="alert('Discord authorization will be connected next.')">
+        Link Discord
+      </button>
+
+      <label for="signupUser">Choose a username</label>
+      <input id="signupUser" name="username"
+        autocomplete="username" required>
+
+      <label for="signupPass">Create a password</label>
+      <input id="signupPass" name="password"
+        type="password" autocomplete="new-password"
+        minlength="8" required>
+
+      <button class="primary" type="submit">
+        Create Account
+      </button>
+
+      <p class="note">
+        You must link Discord before creating an account.
+        Account creation will be enabled after secure
+        backend integration.
+      </p>
+    </form>
   </main>
+
+  <script>
+    function showForm(mode) {
+      const login = mode === 'login';
+
+      document.getElementById('loginForm').hidden = !login;
+      document.getElementById('signupForm').hidden = login;
+      document.getElementById('loginTab').classList.toggle('active', login);
+      document.getElementById('signupTab').classList.toggle('active', !login);
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Login will be connected to the BLOXERA backend next.');
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Real registration requires Discord authorization and backend integration.');
+    });
+  </script>
 </body>
 </html>
