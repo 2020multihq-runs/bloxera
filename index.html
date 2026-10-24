@@ -1,292 +1,161 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLOXERA - Account Recovery</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 24px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #535355;
-      color: #222;
-      font-family: Arial, sans-serif;
-    }
-
-    .panel {
-      width: 100%;
-      max-width: 420px;
-      padding: 24px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
-    }
-
-    .brand {
-      margin: 0 0 6px;
-      font-size: 25px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .subtitle {
-      margin: 0 0 22px;
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .tabs {
-      display: flex;
-      margin-bottom: 22px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .tab {
-      flex: 1;
-      padding: 12px 4px;
-      border: 0;
-      border-bottom: 3px solid transparent;
-      background: transparent;
-      color: #666;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      border-bottom-color: #f59e0b;
-      color: #222;
-      font-weight: bold;
-    }
-
-    h2 {
-      margin: 0 0 8px;
-      font-size: 20px;
-    }
-
-    .description {
-      margin: 0 0 20px;
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    input {
-      width: 100%;
-      height: 42px;
-      margin-bottom: 16px;
-      padding: 0 12px;
-      border: 1px solid #bbb;
-      border-radius: 4px;
-      outline: none;
-      font-size: 14px;
-    }
-
-    input:focus {
-      border-color: #777;
-    }
-
-    .button {
-      width: 100%;
-      min-height: 42px;
-      margin-top: 8px;
-      padding: 11px 14px;
-      border: 0;
-      border-radius: 4px;
-      background: #f59e0b;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .discord-button {
-      background: #5865f2;
-    }
-
-    .button:active {
-      filter: brightness(0.92);
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 18px 0 10px;
-      color: #888;
-      font-size: 12px;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: #ddd;
-    }
-
-    .status {
-      display: none;
-      margin-top: 16px;
-      padding: 12px;
-      border-radius: 4px;
-      background: #f2f2f2;
-      color: #444;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .back-link {
-      display: block;
-      margin-top: 20px;
-      color: #555;
-      font-size: 13px;
-      text-align: center;
-      text-decoration: none;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLOXERA - Account Recovery</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:#f2f2f2;
+  color:#535355;
+  font-family:Arial,Helvetica,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+.panel{
+  width:100%;
+  max-width:390px;
+  background:#fff;
+  border:1px solid #c8c8c8;
+  padding:24px;
+}
+h2{font-size:23px;font-weight:500;margin:0 0 8px}
+p{font-size:14px;line-height:1.45;color:#666}
+.tabs{display:flex;border-bottom:1px solid #ccc;margin:20px 0}
+.tabs button{
+  flex:1;padding:12px 5px;border:0;background:#eee;
+  color:#444;font-size:14px;cursor:pointer
+}
+.tabs button.active{background:#f59e0b;color:#fff}
+label{display:block;font-size:13px;margin:14px 0 6px}
+input,select{
+  width:100%;height:40px;padding:9px;
+  border:1px solid #aaa;border-radius:2px;
+  background:#fff;font-size:14px
+}
+button.action{
+  width:100%;height:40px;margin-top:16px;
+  border:1px solid #b97700;background:#f59e0b;
+  color:#fff;font-size:14px;cursor:pointer
+}
+button.discord{
+  background:#5865f2;border-color:#4752c4
+}
+button:disabled{opacity:.55;cursor:not-allowed}
+.note{font-size:12px;color:#777;margin-top:14px}
+a{color:#a96800;font-size:13px}
+.status{font-size:13px;margin-top:12px;overflow-wrap:anywhere}
+.hidden{display:none}
+</style>
 </head>
-
 <body>
-  <main class="panel">
-    <h1 class="brand">BLOXERA</h1>
-    <p class="subtitle">Recover access to your account.</p>
+<main class="panel">
+  <h2>Account Recovery</h2>
+  <p>Recover access to your BLOXERA account.</p>
 
-    <div class="tabs">
-      <button class="tab active" id="usernameTab"
-              type="button" aria-selected="true">
-        Forgot Username
-      </button>
+  <div class="tabs">
+    <button id="usernameTab" class="active" type="button">Forgot Username</button>
+    <button id="passwordTab" type="button">Forgot Password</button>
+  </div>
 
-      <button class="tab" id="passwordTab"
-              type="button" aria-selected="false">
-        Forgot Password
-      </button>
+  <button id="discordButton" class="action discord" type="button">
+    Link Discord
+  </button>
+
+  <p id="discordStatus">Link the Discord account associated with your BLOXERA account to verify your identity.</p>
+
+  <form id="recoveryForm">
+    <label for="username" id="usernameLabel">BLOXERA username (if known)</label>
+    <input id="username" name="username" autocomplete="username"
+      placeholder="Enter your username">
+
+    <div id="passwordFields" class="hidden">
+      <label for="newPassword">New password</label>
+      <input id="newPassword" name="newPassword" type="password"
+        autocomplete="new-password" minlength="8"
+        placeholder="At least 8 characters">
+      <label for="confirmPassword">Confirm new password</label>
+      <input id="confirmPassword" name="confirmPassword" type="password"
+        autocomplete="new-password" minlength="8"
+        placeholder="Enter it again">
     </div>
 
-    <section id="usernameSection">
-      <h2>Forgot Username</h2>
-      <p class="description">
-        Authorize your Discord account to recover your BLOXERA username.
-      </p>
+    <button class="action" type="submit" id="submitButton">
+      Recover Username
+    </button>
+  </form>
 
-      <button class="button discord-button" id="discordUsername"
-              type="button">
-        Continue with Discord
-      </button>
-    </section>
+  <div id="status" class="status" role="status"></div>
+  <p class="note">For account security, recovery requires verification through the Discord account linked to BLOXERA.</p>
+  <a href="/">Back to Login</a>
+</main>
 
-    <section id="passwordSection" hidden>
-      <h2>Forgot Password</h2>
-      <p class="description">
-        Authorize the Discord account linked to your BLOXERA account
-        to begin password recovery.
-      </p>
+<script>
+const API_BASE = "https://bloxera.2020multihq.workers.dev";
 
-      <label for="username">BLOXERA Username</label>
-      <input id="username" name="username"
-             autocomplete="username"
-             placeholder="Enter your username">
+let recoveryType = "username";
+let discordVerified = false;
 
-      <button class="button discord-button" id="discordPassword"
-              type="button">
-        Continue with Discord
-      </button>
+const usernameTab = document.getElementById("usernameTab");
+const passwordTab = document.getElementById("passwordTab");
+const usernameLabel = document.getElementById("usernameLabel");
+const usernameInput = document.getElementById("username");
+const passwordFields = document.getElementById("passwordFields");
+const submitButton = document.getElementById("submitButton");
+const statusBox = document.getElementById("status");
+const discordButton = document.getElementById("discordButton");
+const discordStatus = document.getElementById("discordStatus");
 
-      <div class="divider">THEN</div>
+function setMode(mode) {
+  recoveryType = mode;
+  usernameTab.classList.toggle("active", mode === "username");
+  passwordTab.classList.toggle("active", mode === "password");
+  passwordFields.classList.toggle("hidden", mode !== "password");
+  usernameLabel.textContent = mode === "username"
+    ? "BLOXERA username (if known)"
+    : "BLOXERA username";
+  usernameInput.required = mode === "password";
+  submitButton.textContent = mode === "username"
+    ? "Recover Username"
+    : "Reset Password";
+  statusBox.textContent = "";
+}
 
-      <button class="button" id="recoverPassword" type="button">
-        Recover Password
-      </button>
-    </section>
+usernameTab.addEventListener("click", () => setMode("username"));
+passwordTab.addEventListener("click", () => setMode("password"));
 
-    <div class="status" id="status" role="status"></div>
+/*
+  IMPORTANT:
+  This button must be connected to a real server-created Discord OAuth URL.
+  Never collect a Discord password on this page.
+*/
+discordButton.addEventListener("click", async () => {
+  statusBox.textContent =
+    "Discord OAuth is not connected yet. The backend must provide the official authorization URL.";
+});
 
-    <a class="back-link" href="/">Back to Login</a>
-  </main>
+/*
+  Do not send passwords or recovery requests to an unimplemented endpoint.
+  Connect this form only after the Worker has verified Discord OAuth and
+  implemented secure recovery endpoints.
+*/
+document.getElementById("recoveryForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-  <script>
-    const API_BASE = "https://bloxera.2020multihq.workers.dev";
+  if (!discordVerified) {
+    statusBox.textContent =
+      "Please link and verify your Discord account first. Discord authorization is not connected yet.";
+    return;
+  }
 
-    const usernameTab = document.getElementById("usernameTab");
-    const passwordTab = document.getElementById("passwordTab");
-    const usernameSection = document.getElementById("usernameSection");
-    const passwordSection = document.getElementById("passwordSection");
-    const status = document.getElementById("status");
-
-    function showTab(tab) {
-      const showUsername = tab === "username";
-
-      usernameSection.hidden = !showUsername;
-      passwordSection.hidden = showUsername;
-
-      usernameTab.classList.toggle("active", showUsername);
-      passwordTab.classList.toggle("active", !showUsername);
-
-      usernameTab.setAttribute("aria-selected", showUsername);
-      passwordTab.setAttribute("aria-selected", !showUsername);
-
-      status.style.display = "none";
-      status.textContent = "";
-    }
-
-    function showMessage(message) {
-      status.textContent = message;
-      status.style.display = "block";
-    }
-
-    usernameTab.addEventListener("click", () => showTab("username"));
-    passwordTab.addEventListener("click", () => showTab("password"));
-
-    document.getElementById("discordUsername").addEventListener("click", () => {
-      showMessage(
-        "Discord authorization is not connected yet. Account recovery is not available."
-      );
-    });
-
-    document.getElementById("discordPassword").addEventListener("click", () => {
-      showMessage(
-        "Discord authorization is not connected yet. Account recovery is not available."
-      );
-    });
-
-    document.getElementById("recoverPassword").addEventListener("click", () => {
-      const username = document.getElementById("username").value.trim();
-
-      if (!username) {
-        showMessage("Please enter your BLOXERA username.");
-        return;
-      }
-
-      showMessage(
-        "Password recovery is not connected yet. Your account has not been changed."
-      );
-    });
-  </script>
+  statusBox.textContent =
+    "Recovery service is not connected yet. No account details have been changed.";
+});
+</script>
 </body>
 </html>
